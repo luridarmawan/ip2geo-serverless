@@ -17,7 +17,6 @@
   "dependencies": {
     "@maxmind/geoip2-node": "^0.5.0",
     "express": "^4.16.4",
-    "is-ip": "^3.0.0",
-    "serverless-offline": "^4.9.4"
+    "is-ip": "^3.0.0"
   }
 }
