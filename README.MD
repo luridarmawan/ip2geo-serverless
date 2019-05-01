@@ -2,7 +2,7 @@
 
 This script reads IP addresses from parameter and uses the MaxMind GeoIP databases to output various data points for each source IP. The user can specify various fields for output in a format string. You can use this script to download the GeoIP database files if needed as well.
 
-Avaialable as Single API or build on Amazon Lambda Serverless Infrastructure.
+**Avaialable as Single API or build on Amazon Lambda Serverless Infrastructure.**
 
 This script is an example of using [API to Serverless Bridge](https://github.com/luridarmawan/API-to-Serverless-Bridge).
 
@@ -44,35 +44,10 @@ $ serverless config credentials --provider aws --key AWS_ACCESS_KEY --secret AWS
 
 ```bash
 $ serverless deploy
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-.....
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service ip2geo.zip file to S3 (31.08 MB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.................................
-Serverless: Stack update finished...
-Service Information
-service: ip2geo
-stage: dev
-region: ap-southeast-1
-stack: ip2geo-dev
-resources: 11
-api keys:
-  None
-endpoints:
-  GET - https://[code].execute-api.ap-southeast-1.amazonaws.com/dev/{ip}
-functions:
-  ip2Geo: ip2geo-dev-ip2Geo
-layers:
-  None
 ```
+
+![Serverless Deploy](img/serverless-deploy.png)
+
 
 This command will automatically create the Serverless Lambda Function and API Gateway in the AWS account.
 
@@ -139,41 +114,21 @@ $ curl https://somecode.execute-api.ap-southeast-1.amazonaws.com/dev/8.8.8.8
 }
 ```
 
+![Result from Browser](img/result-from-browser.png)
 
-Example output:
-
-```json
-{
-  "status": 200,
-  "data": {
-    "ip": "8.8.8.8",
-    "city": "",
-    "country": {
-      "isoCode": "US",
-      "name": "United States"
-    },
-    "continent": "North America",
-    "traits": {
-      "ipAddress": "8.8.8.8",
-      "isAnonymous": false,
-      "isAnonymousProxy": false,
-      "isAnonymousVpn": false,
-      "isHostingProvider": false,
-      "isLegitimateProxy": false,
-      "isPublicProxy": false,
-      "isSatelliteProvider": false,
-      "isTorExitNode": false
-    }
-  }
-}
-```
 
 ## Improvement
 
 
+## Contributing
 
-Note:
+We are happy to accept more line code from the community. 🎉
 
-- Download MaxMind City GeoLite2 Database from [https://dev.maxmind.com/geoip/geoip2/geolite2/](https://dev.maxmind.com/geoip/geoip2/geolite2/)
+## References
+
+- [API to Serverless Bridge](https://github.com/luridarmawan/API-to-Serverless-Bridge)
+- [Amazon AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/index.html)
+- [Amazon AWS API Gateway Documentation](https://docs.aws.amazon.com/apigateway/index.html)
+- [Nodejs Serverless Framework](https://serverless.com/)
 
 
