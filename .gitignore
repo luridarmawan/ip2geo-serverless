@@ -5,7 +5,7 @@ jspm_packages
 # Serverless directories
 .serverless
 
-data
+data/GeoLite2-City.mmdb
 
 config/config.js
 yarn-error.log
