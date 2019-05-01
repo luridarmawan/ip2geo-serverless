@@ -3,8 +3,10 @@ const fs = require('fs');
 const ip2GeoReader = require('@maxmind/geoip2-node').Reader;
 
 const ip2geoDataPath = './data/GeoLite2-City.mmdb';
+const Config = require('../config/Config.json');
 
-function ip2geo(req,res){
+async function ip2geo(req,res){
+    var redis = null;
     let IP = (typeof req.params.ip === 'undefined') ? '' : req.params.ip;
     var Result = {
         status: 500
@@ -16,6 +18,22 @@ function ip2geo(req,res){
         return res.json(Result);
     }
 
+    // check from redis cache
+    if (Config.redis.enable){
+        redis = require('../utils/redis');
+
+        var ipDataCache = await redis.GetKey('ip2geo/'+IP);
+        if (ipDataCache !== null){
+            ipDataCache = JSON.parse(ipDataCache);
+            ipDataCache.cached = true;
+
+            Result.status = 200;
+            Result.data = ipDataCache;
+            return res.json(Result);
+        }
+    }
+
+    // Check IP
     try {
         if (fs.existsSync(ip2geoDataPath)) {
 
@@ -35,9 +53,14 @@ function ip2geo(req,res){
             }
             try{
                 ipData.city = (response.city.names.en !== undefined) ? response.city.names.en : '';
-                console.log('ada')
             }catch(err){
-                console.log(response.city)
+            }
+
+            if (Config.redis.enable){
+                try{
+                    redis.SetKey('ip2geo/'+IP, 10, JSON.stringify(ipData));
+                }catch(err){
+                }
             }
         
             Result.status = 200;

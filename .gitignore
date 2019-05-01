@@ -7,7 +7,7 @@ jspm_packages
 
 data/GeoLite2-City.mmdb
 
-config/config.js
+config/Config.json
 yarn-error.log
 yarn.lock
 note.txt
