@@ -1,0 +1,9 @@
+{
+  "redis": {
+    "enable": true,
+    "host": "localhost",
+    "port": "6379",
+    "username": "username",
+    "password": "password"
+  }
+}

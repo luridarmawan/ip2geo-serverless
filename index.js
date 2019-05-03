@@ -15,6 +15,11 @@ app.use(function(req, res, next) {
 
 const ip2geo = require('./controllers/ip2geo_controller').ip2geo;
 
+app.get('/',(req, res, next) => {
+  res.status(404);
+	res.send({});
+});
+
 app.get('/:ip',(req, res) => {
     ip2geo(req,res);
 });

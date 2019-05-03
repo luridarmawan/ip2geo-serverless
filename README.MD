@@ -11,6 +11,8 @@ This script is an example of using [API to Serverless Bridge](https://github.com
 
 Download MaxMind City GeoLite2 Database (GeoLite2-City.mmdb) from [https://dev.maxmind.com/geoip/geoip2/geolite2/](https://dev.maxmind.com/geoip/geoip2/geolite2/), then copy it in 'data' directory. 
 
+Copy file "config/cp-Config.json" to "config/Config.json"
+
 ### Run as single service
 
 ```bash
