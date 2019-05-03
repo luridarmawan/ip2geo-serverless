@@ -6,6 +6,7 @@ const ip2geoDataPath = './data/GeoLite2-City.mmdb';
 const Config = require('../config/Config.json');
 
 async function ip2geo(req,res){
+    res.header("Content-type", "application/json");
     var redis = null;
     let IP = (typeof req.params.ip === 'undefined') ? '' : req.params.ip;
     var Result = {
@@ -34,6 +35,16 @@ async function ip2geo(req,res){
     }
 
     // Check IP
+    var ipData = {
+        ip: IP,
+        city: '',
+        country: {
+            isoCode: '',
+            name: ''
+        },
+        continent: '',
+    }
+
     try {
         if (fs.existsSync(ip2geoDataPath)) {
 
@@ -41,7 +52,7 @@ async function ip2geo(req,res){
             const ip2GeoData = ip2GeoReader.openBuffer(dbBuffer);
             const response = ip2GeoData.city(IP);
         
-            const ipData = {
+            ipData = {
                 ip: IP,
                 city: '',
                 country: {
@@ -71,7 +82,8 @@ async function ip2geo(req,res){
             Result.msg = 'IP-GEO Data not found';
         }
     }catch(err){
-        Result.msg = 'failed: IP-GEO Data not found';
+        Result.msg = 'IP-GEO failed: ' + err;
+        Result.data = ipData;
     }
     
     return res.json(Result);
