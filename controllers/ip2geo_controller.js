@@ -58,7 +58,7 @@ async function ip2geo(req,res){
 
             if (Config.redis.enable){
                 try{
-                    redis.SetKey('ip2geo/'+IP, 10, JSON.stringify(ipData));
+                    redis.SetKey('ip2geo/'+IP, 3600*24, JSON.stringify(ipData));
                     ipData.save = true;
                 }catch(err){
                 }
