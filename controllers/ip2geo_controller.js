@@ -57,7 +57,7 @@ async function ip2geo(req,res){
                 city: '',
                 country: {
                     isoCode: response.country.isoCode,
-                    name: response.country.names.en
+                    name: (response.country.names !== undefined) ? response.country.names.en : ''
                 },
                 continent: (response.continent.names.en !== undefined) ? response.continent.names.en : '',
                 traits: response.traits

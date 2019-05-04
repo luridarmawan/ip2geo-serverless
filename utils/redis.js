@@ -8,7 +8,6 @@ const redisOptions = {
 module.exports = {
     SetKey: (key, expiredTime, value) => {
         try{
-            console.log(redisOptions.url)
             const clientRedis = redis.createClient(redisOptions)
             clientRedis.setex(key, expiredTime, value)
             clientRedis.quit();    
